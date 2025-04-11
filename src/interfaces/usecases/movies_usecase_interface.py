@@ -6,13 +6,16 @@ from src.interfaces.repositories.movies_repository_interface import IMoviesRepos
 
 
 class MoviesUseCaseInterface(ABC):
-    def __init__(self, customer_repo: IMoviesRepository) -> None:
+    def __init__(self, movie_repo: IMoviesRepository) -> None:
         raise NotImplementedError
 
     def get_by_id(self, customer_id: uuid.UUID):
         pass
 
     def get_all(self):
+        pass
+
+    def get_all_winners(self):
         pass
 
     def create(self, input_dto: MovieCreate) -> Movie:

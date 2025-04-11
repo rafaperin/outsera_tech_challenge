@@ -1,8 +1,8 @@
-from typing import Optional, Sequence
+from typing import Optional, Sequence, List
 
 from pydantic import Field
 
-from src.utils.utils import CamelModel
+from src.utils.camel_case import CamelModel
 
 
 class MovieBase(CamelModel):
@@ -42,3 +42,15 @@ class MovieResponse(CamelModel):
 
 class MovieListResponse(CamelModel):
     result: Sequence[Movie]
+
+
+class ProducerInterval(CamelModel):
+    producer: str
+    interval: int
+    previous_win: int
+    following_win: int
+
+
+class ProducerIntervalResponse(CamelModel):
+    min: List[ProducerInterval]
+    max: List[ProducerInterval]

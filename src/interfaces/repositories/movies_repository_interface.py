@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 from typing import List
 
+import sqlalchemy
+
 from src.schemas.movies_schema import Movie
 
 
@@ -11,6 +13,9 @@ class IMoviesRepository(ABC):
 
     @abstractmethod
     def get_all(self) -> List[Movie]:
+        pass
+
+    def get_all_winners(self) -> List[sqlalchemy.Row]:
         pass
 
     @abstractmethod

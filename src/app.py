@@ -11,11 +11,14 @@ from src.api.endpoints.movies_api import router as movies_router
 from src.api.endpoints.health_api import router as health_router
 from src.api.errors.api_errors import APIErrorMessage
 from src.config.errors import DomainError, ResourceNotFound, RepositoryError
+from src.external.sqlite3_db import setup_database, conn
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    setup_database()
     yield
+    conn.close()
 
 
 app = FastAPI(lifespan=lifespan, debug=True)
@@ -68,4 +71,4 @@ def custom_openapi() -> Dict[str, Any]:
 app.openapi = custom_openapi  # type: ignore
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="localhost", port=8000, log_level="info", reload=True, debug=True)
+    uvicorn.run(app, host="localhost", port=8000)
